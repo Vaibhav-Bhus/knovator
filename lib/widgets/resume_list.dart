@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:knovator/providers/resume_provider.dart';
+import 'package:knovator/widgets/custom_toast.dart';
 import 'package:provider/provider.dart';
 
 class ResumeList extends StatelessWidget {
@@ -13,6 +14,7 @@ class ResumeList extends StatelessWidget {
     return ReorderableListView(
       onReorder: (oldIndex, newIndex) {
         resumeProvider.reorderItems(oldIndex, newIndex);
+        customToast('Resume item index changed');
       },
       children: List.generate(resumeProvider.resumeItems.length, (index) {
         debugPrint(resumeProvider.resumeItems.length.toString());

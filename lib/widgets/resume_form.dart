@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:knovator/models/resume_item_model.dart';
 import 'package:knovator/providers/resume_provider.dart';
+import 'package:knovator/widgets/custom_toast.dart';
 import 'package:provider/provider.dart';
 
 class ResumeItemModelForm extends StatefulWidget {
@@ -49,17 +50,28 @@ class _ResumeItemModelFormState extends State<ResumeItemModelForm> {
           const SizedBox(height: 16.0),
           ElevatedButton(
             onPressed: () {
-              final newResumeItemModel = ResumeItemModel(
-                title: _titleController.text,
-                content: _contentController.text,
-              );
-
-              if (widget.index != null) {
-                context
-                    .read<ResumeProvider>()
-                    .updateItem(widget.index!, newResumeItemModel);
+              if (_titleController.text.trim().isEmpty) {
+                customToast('Title cannot be empty');
+              }
+              if (_contentController.text.trim().isEmpty) {
+                customToast('Content cannot be empty');
               } else {
-                context.read<ResumeProvider>().addItem(newResumeItemModel);
+                final newResumeItemModel = ResumeItemModel(
+                  title: _titleController.text,
+                  content: _contentController.text,
+                );
+
+                if (widget.index != null) {
+                  context
+                      .read<ResumeProvider>()
+                      .updateItem(widget.index!, newResumeItemModel);
+                customToast('Resume Item Updated');
+
+                } else {
+                  context.read<ResumeProvider>().addItem(newResumeItemModel);
+                customToast('Resume Item Adeed');
+
+                }
               }
 
               context.pushReplacement('/resumeviewer');
