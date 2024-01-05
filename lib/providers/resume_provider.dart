@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:knovator/models/resume_item_model.dart';
 
@@ -8,7 +6,7 @@ class ResumeProvider extends ChangeNotifier {
 
   void addItem(ResumeItemModel item) {
     resumeItems.add(item);
-    log(resumeItems.length.toString());
+    debugPrint(resumeItems.length.toString());
     notifyListeners();
   }
 

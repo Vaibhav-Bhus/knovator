@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:knovator/providers/resume_provider.dart';
@@ -16,7 +15,7 @@ class ResumeList extends StatelessWidget {
         resumeProvider.reorderItems(oldIndex, newIndex);
       },
       children: List.generate(resumeProvider.resumeItems.length, (index) {
-        log(resumeProvider.resumeItems.length.toString());
+        debugPrint(resumeProvider.resumeItems.length.toString());
         return ResumeItemModelTile(
           index: index,
           key: ValueKey(resumeProvider.resumeItems[index]),
@@ -39,7 +38,6 @@ class ResumeItemModelTile extends StatelessWidget {
       key: ValueKey(resumeItemModel),
       onDismissed: (direction) {
         context.read<ResumeProvider>().deleteItem(index);
-        
       },
       child: ListTile(
         key: ValueKey(resumeItemModel),
