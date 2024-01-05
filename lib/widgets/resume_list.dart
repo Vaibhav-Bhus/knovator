@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:knovator/providers/resume_provider.dart';
 import 'package:provider/provider.dart';
 
-
 class ResumeList extends StatelessWidget {
   const ResumeList({super.key});
 
@@ -36,14 +35,20 @@ class ResumeItemModelTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final resumeProvider = Provider.of<ResumeProvider>(context);
     final resumeItemModel = resumeProvider.resumeItems[index];
-    return ListTile(
+    return Dismissible(
       key: ValueKey(resumeItemModel),
-      title: Text(resumeItemModel.title),
-      subtitle: Text(resumeItemModel.content),
-      onTap: () {
-        context.go('/', extra: index);
+      onDismissed: (direction) {
+        context.read<ResumeProvider>().deleteItem(index);
         
       },
+      child: ListTile(
+        key: ValueKey(resumeItemModel),
+        title: Text(resumeItemModel.title),
+        subtitle: Text(resumeItemModel.content),
+        onTap: () {
+          context.go('/', extra: index);
+        },
+      ),
     );
   }
 }
