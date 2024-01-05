@@ -65,16 +65,13 @@ class _ResumeItemModelFormState extends State<ResumeItemModelForm> {
                   context
                       .read<ResumeProvider>()
                       .updateItem(widget.index!, newResumeItemModel);
-                customToast('Resume Item Updated');
-
+                  customToast('Resume Item Updated');
                 } else {
                   context.read<ResumeProvider>().addItem(newResumeItemModel);
-                customToast('Resume Item Adeed');
-
+                  customToast('Resume Item Added');
                 }
+                context.pushReplacement('/resumeviewer');
               }
-
-              context.pushReplacement('/resumeviewer');
             },
             child: const Text('Save'),
           ),

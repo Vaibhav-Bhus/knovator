@@ -40,6 +40,7 @@ class ResumeItemModelTile extends StatelessWidget {
       key: ValueKey(resumeItemModel),
       onDismissed: (direction) {
         context.read<ResumeProvider>().deleteItem(index);
+        customToast('Item Deleted from resume');
       },
       child: ListTile(
         key: ValueKey(resumeItemModel),
